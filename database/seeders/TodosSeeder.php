@@ -7,6 +7,8 @@ use App\Models\User;
 use App\Models\Team;
 use Laravel\Jetstream\HasTeams;
 use Illuminate\Support\Facades\Hash;
+use Spatie\Permission\Models\Role;
+use Spatie\Permission\Models\Permission;
 
 class TodosSeeder extends Seeder
 {
@@ -21,37 +23,40 @@ class TodosSeeder extends Seeder
             'name' => 'SDTPunto',
             'email' => 'sdtpunto@gmail.com',
             'password' => Hash::make('admin1234'),
-        ]);
+        ])->assignRole('Admin');
 
-        $userPueba = Team::create([
+       /*  $userPueba = Team::create([
             'user_id' => '1',
             'name' => 'SDTPunto',
             'personal_team' => '1',
-        ]);
+        ]); */
 
-        /* $userPueba = User::create([
+        $userPueba = User::create([
             'name' => 'SDTPuntod',
             'email' => 'sdtpuntod@gmail.com',
             'password' => Hash::make('admin1234'),
-        ]);
+        ])->assignRole('Admin');
 
         $userPueba = User::create([
             'name' => 'SDTPuntode',
             'email' => 'sdtpuntode@gmail.com',
             'password' => Hash::make('admin1234'),
-        ]);
+        ])->assignRole('Jefe de turno');
 
         $userPueba = User::create([
             'name' => 'SDTPuntodev',
             'email' => 'sdtpuntodev@gmail.com',
             'password' => Hash::make('admin1234'),
-        ]);
+        ])->assignRole('Vendedor');
 
         $userPueba = User::create([
             'name' => 'SDTPuntodeve',
             'email' => 'sdtpuntdeveo@gmail.com',
             'password' => Hash::make('admin1234'),
-        ]);
- */
+        ])->assignRole('cliente');
+
+
+
+
     }
 }

@@ -5,8 +5,9 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Spatie\Permission\Models\Role;
 
-class HomeController extends Controller
+class UserController extends Controller
 {
 
     public function __construct()
@@ -17,10 +18,10 @@ class HomeController extends Controller
     public function index()
     {
         $users = User::all();
-        return view('admin/home/index', compact('users'));
+        return view('admin/user/index', compact('users'));
     }
 
-   /*  public function create()
+    public function create()
     {
         return view('admin/user/create');
     }
@@ -30,13 +31,16 @@ class HomeController extends Controller
         $newUser = new User();
         $newUser->name = $request->name;
         $newUser->email = $request->email;
-        //$newUser->save();
+        $newUser->email = $request->email;
+        $newUser->save();
+        return redirect('admin/user');
     }
 
     public function edit($id)
     {
+        $roles = Role::all();
         $user = User::findOrFail($id);
-        return view('admin/user/edit',compact('user'));
+        return view('admin/user/edit',compact('user', 'roles'));
     }
 
     public function update(Request $request, $id)
@@ -54,5 +58,5 @@ class HomeController extends Controller
         $user->delete();
 
         return redirect('admin/user')->with('delete', 'ok');
-    }*/
+    }
 }

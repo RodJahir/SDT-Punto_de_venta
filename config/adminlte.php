@@ -187,7 +187,7 @@ return [
     */
 
     'use_route_url' => false,
-    'dashboard_url' => 'admin/user',
+    'dashboard_url' => 'admin/home',
     'logout_url' => 'logout',
     'login_url' => 'login',
     'register_url' => 'register',
@@ -233,6 +233,13 @@ return [
             'text' => 'blog',
             'url'  => 'admin/blog',
             'can'  => 'manage-blog',
+        ],
+        [
+            'text'        => 'Inicio',
+            'url'         => 'admin/home',
+            'icon'        => 'far fa-fw fa-user',
+            'label'       => '',
+            'label_color' => 'success',
         ],
         [
             'text'        => 'Usuarios',

@@ -23,7 +23,38 @@
                     </div>
                 <!-- /.card-header -->
                 <div class="card-body">
-                    <form method="POST" action="{{ url('/admin/user/update', $user->id) }}">
+
+                <form method="POST" action="{{ url('/admin/user/update', $user->id) }}">
+                        @csrf
+
+                        <div class="form-group row">
+                            <label for="name" class="col-md-4 col-form-label text-md-right">Nombre</label>
+
+                            <div class="col-md-6">
+                                <p class="form-control">{{ $user->name}}</p>
+                            </div>
+                        </div>
+
+                        <!-- !! Form::model($user, ['route'=>['admin.user.update', $user], 'method'=>'put']) !! -->
+                            @foreach($roles as $role)
+                                <div>
+                                    <label>
+                                        <!-- !! Form::checkbox('roles[]',$role->id, null, ['class' => 'mr-1']) !! -->
+                                        {{$role->name}}
+                                    </label>
+                                </div>
+                                @endforeach
+                        <!-- !! Form::close() !! -->
+
+                        <div class="form-group row mb-0">
+                            <div class="col-md-6 offset-md-4">
+                                <button type="submit" class="btn btn-primary">
+                                    Actualizar
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                    <!-- <form method="POST" action="{{ url('/admin/user/update', $user->id) }}">
                         @csrf
 
                         <div class="form-group row">
@@ -53,7 +84,7 @@
                                 @enderror
                             </div>
                         </div>
-                        <!-- <div class="form-group row">
+                        !-- <div class="form-group row">
                             <label for="password" class="col-md-4 col-form-label text-md-right"></label>
 
                              <div class="col-md-6">
@@ -83,7 +114,7 @@
                             <div class="col-md-6">
                                 <input id="password-confirm" type="password" class="form-control" name="password_confirmation" autocomplete="new-password">
                             </div>
-                        </div> -->
+                        </div> --
 
                         <div class="form-group row mb-0">
                             <div class="col-md-6 offset-md-4">
@@ -92,7 +123,7 @@
                                 </button>
                             </div>
                         </div>
-                    </form>
+                    </form> -->
                 </div>
                 <!-- /.card-body -->
                 </div>

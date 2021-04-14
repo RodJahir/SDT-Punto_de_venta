@@ -2,13 +2,17 @@
 
 @section('title','Administración - Usuarios')
 
-
+@section('css')
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.24/css/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.2.7/css/responsive.bootstrap4.min.css">
+@stop
 @section('content_header')
     <h1>
         Usuarios
-        <a type="submit" name="nuevo" class="btn btn-default" href="{{ url('/admin/user/create')}}" data-target="" >
+        <!-- <a type="submit" name="nuevo" class="btn btn-default" href="{{ url('/admin/user/create')}}" data-target="" >
             Nuevo
-        </a>
+        </a> -->
     </h1>
 @stop
 
@@ -79,6 +83,10 @@
 @stop
 
 @section('js')
+    <script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.24/js/dataTables.bootstrap4.min.js"></script>
+    <script src="https://cdn.datatables.net/responsive/2.2.7/js/dataTables.responsive.min.js"></script>
+    <script src="https://cdn.datatables.net/responsive/2.2.7/js/responsive.bootstrap4.min.js"></script>
 
     @if (session('delete') == 'ok')
         <script>
@@ -99,7 +107,7 @@
 
         $(document).ready(function() {
             $('#tblUsers').DataTable( {
-                "order": [[ 3, "desc" ]],
+                "order": [[ 0, "desc" ]],
                 'language': {
 				    'sProcessing':'Procesando...',
 				    'sLengthMenu':'Mostrar _MENU_ registros',
@@ -135,7 +143,9 @@
               			titleAttr: 'CSV'
       		        }
   		        ],
-			    "stateSave": true
+			    "stateSave": true,
+                //'responsive': true,
+                'autoWidth' : false
 		    });
         });
         $("[data-toggle='tooltip']").tooltip();
