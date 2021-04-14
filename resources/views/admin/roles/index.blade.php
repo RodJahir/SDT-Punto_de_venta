@@ -1,6 +1,6 @@
 @extends('adminlte::page')
 
-@section('title','Administración - Usuarios')
+@section('title','Administración - Roles')
 
 @section('css')
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.css">
@@ -9,67 +9,67 @@
 @stop
 @section('content_header')
     <h1>
-        Usuarios
-        <!-- <a type="submit" name="nuevo" class="btn btn-default" href="{{ url('/admin/user/create')}}" data-target="" >
+        Roles
+        @can('admin.roles.create')
+        <a type="submit" name="nuevo" class="btn btn-default btn-sm float-right" href="{{ url('/admin/roles/create')}}" data-target="" >
             Nuevo
-        </a> -->
+        </a>
+        @endcan
     </h1>
 @stop
 
 @section('content')
 
+    @if(session('info'))
+        <div class="alert alert-success">
+            {{session('info')}}
+        </div>
+    @endif
     <div class="container-fluid">
         <div class="row">
             <div class="col-12">
                 <div class="card">
                     <div class="card-header">
-                        <h3 class="card-title">Listado de Usuarios</h3>
+                        <h3 class="card-title">Listado de roles</h3>
                     </div>
                 <!-- /.card-header -->
                 <div class="card-body">
-                    <table id="tblUsers" class="table table-bordered table-striped">
+                    <table id="tblRoles" class="table table-bordered table-striped">
                         <thead>
                             <tr>
                                 <th>Id</th>
-                                <th>Nombre</th>
-                                <th>email</th>
-                                <th>created_at</th>
-                                <th>updated_at</th>
-                                <td>&nbsp;</td>
+                                <th>Role</th>
+                                <th ></th>
                             </tr>
                         </thead>
                         <tbody>
-                            @forelse ($users as $item)
+                            @foreach ($roles as $role)
                                 <tr>
-                                    <td>{{$item->id}}</td>
-                                    <td>{{$item->name}}</td>
-                                    <td>{{$item->email}}</td>
-                                    <td>{{$item->created_at}}</td>
-                                    <td>{{$item->created_at}}</td>
+                                    <td>{{$role->id}}</td>
+                                    <td>{{$role->name}}</td>
                                     <td>
                                         <div class="form-group row mb-0">
-                                            @can('admin.user.edit')
-                                                <a href="{{url('/admin/user/edit', $item->id)}}" class="btn btn-warning">Editar</a>
+                                            @can('admin.roles.edit')
+                                                <a href="{{url('/admin/roles/edit', $role)}}" class="btn btn-sm btn-warning">Editar</a>
                                             @endcan
-                                            @can('admin.user.destroy')
-                                                <form method="POST" action="{{ url('/admin/user/delete', $item->id) }}" class="form-delete">
+                                            @can('admin.roles.delete')
+                                                <form method="POST" action="{{ url('/admin/roles/delete', $role->id) }}" class="form-delete">
                                                     @csrf
                                                     @method('delete')
-                                                    <button type="submit" class="btn btn-danger">Eliminar</button>
+                                                    <button type="submit" class="btn btn-sm btn-danger">Eliminar</button>
                                                 </form>
                                             @endcan
                                         </div>
+                                    </td>
                                     </td>
                                 </tr>
                             @endforeach
                         </tbody>
                         <tfoot>
                             <tr>
-                            <th>Id</th>
-                                <th>Nombre</th>
-                                <th>email</th>
-                                <th>created_at</th>
-                                <th>updated_at</th>
+                                <th>Id</th>
+                                <th>Role</th>
+                                <th></th>
                             </tr>
                         </tfoot>
                     </table>
@@ -109,8 +109,8 @@
         });
 
         $(document).ready(function() {
-            $('#tblUsers').DataTable( {
-                "order": [[ 0, "asc" ]],
+            $('#tblRoles').DataTable( {
+                "order": [[ 1, "asc" ]],
                 'language': {
 				    'sProcessing':'Procesando...',
 				    'sLengthMenu':'Mostrar _MENU_ registros',

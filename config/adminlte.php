@@ -230,16 +230,12 @@ return [
             'topnav' => true,
         ],
         [
-            'text' => 'blog',
-            'url'  => 'admin/blog',
-            'can'  => 'manage-blog',
-        ],
-        [
             'text'        => 'Inicio',
             'url'         => 'admin/home',
             'icon'        => 'far fa-fw fa-user',
             'label'       => '',
             'label_color' => 'success',
+            'can'         => 'admin.home.index'
         ],
         [
             'text'        => 'Usuarios',
@@ -247,18 +243,31 @@ return [
             'icon'        => 'far fa-fw fa-user',
             'label'       => '',
             'label_color' => 'success',
+            'can'         => 'admin.user.index'
         ],
+        [
+            'text'        => 'Lista de roles',
+            'url'         => 'admin/roles',
+            'icon'        => 'far fa-fw fa-list-alt',
+            'label'       => '',
+            'label_color' => 'success',
+            'can'         => 'admin.roles.index'
+        ],
+        [
+            'text' => 'Ventas',
+            'url'  => 'admin/seller',
+            'icon' => 'fas fa-fw fa-shopping-cart',
+            'can'         => 'admin.seller.index'
+        ],
+
         ['header' => 'account_settings'],
         [
             'text' => 'profile',
             'url'  => 'user/profile',
             'icon' => 'fas fa-fw fa-user',
+
         ],
-    /*     [
-            'text' => 'change_password',
-            'url'  => 'admin/settings',
-            'icon' => 'fas fa-fw fa-lock',
-        ], */
+
        /*  [
             'text'    => 'multilevel',
             'icon'    => 'fas fa-fw fa-share',

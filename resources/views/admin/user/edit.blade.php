@@ -14,6 +14,11 @@
 
 @section('content')
 
+@if (session('info'))
+    <div class="alert alert-success">
+        <strong>{{session('info')}}</strong>
+    </div>
+@endif
 <div class="container-fluid">
         <div class="row">
             <div class="col-12">
@@ -23,37 +28,27 @@
                     </div>
                 <!-- /.card-header -->
                 <div class="card-body">
+                    <div class="form-group row">
+                        <label for="name" class="col-md-4 col-form-label text-md-right">Nombre</label>
 
-                <form method="POST" action="{{ url('/admin/user/update', $user->id) }}">
-                        @csrf
-
-                        <div class="form-group row">
-                            <label for="name" class="col-md-4 col-form-label text-md-right">Nombre</label>
-
-                            <div class="col-md-6">
-                                <p class="form-control">{{ $user->name}}</p>
-                            </div>
+                        <div class="col-md-6">
+                            <p class="form-control">{{ $user->name}}</p>
                         </div>
-
-                        <!-- !! Form::model($user, ['route'=>['admin.user.update', $user], 'method'=>'put']) !! -->
-                            @foreach($roles as $role)
-                                <div>
-                                    <label>
-                                        <!-- !! Form::checkbox('roles[]',$role->id, null, ['class' => 'mr-1']) !! -->
-                                        {{$role->name}}
-                                    </label>
-                                </div>
-                                @endforeach
-                        <!-- !! Form::close() !! -->
-
-                        <div class="form-group row mb-0">
-                            <div class="col-md-6 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
-                                    Actualizar
-                                </button>
+                    </div>
+                    <h2 class="h5">Listado de roles</h2>
+                    {!! Form::model($user, ['route'=>['admin.user.update', $user], 'method'=>'put']) !!}
+                        @foreach($roles as $role)
+                            <div>
+                                <label>
+                                    {!! Form::checkbox('roles[]',$role->id, null, ['class' => 'mr-1']) !!}
+                                    {{$role->name}}
+                                </label>
                             </div>
-                        </div>
-                    </form>
+                        @endforeach
+                        {!! Form::submit('Asignar rol', ['class'=>'btn btn-primary mt-2'])!!}
+                    {!! Form::close() !!}
+
+
                     <!-- <form method="POST" action="{{ url('/admin/user/update', $user->id) }}">
                         @csrf
 

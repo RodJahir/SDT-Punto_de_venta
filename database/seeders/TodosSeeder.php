@@ -51,7 +51,7 @@ class TodosSeeder extends Seeder
 
         $userPueba = User::create([
             'name' => 'SDTPuntodeve',
-            'email' => 'sdtpuntdeveo@gmail.com',
+            'email' => 'sdtpuntodeve@gmail.com',
             'password' => Hash::make('admin1234'),
         ])->assignRole('cliente');
 

@@ -5,7 +5,7 @@
 
 @section('content_header')
     <h1>
-        Inicio
+        Crear nuevo rol
     </h1>
 @stop
 
@@ -16,7 +16,11 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-header">
-                        <h3 class="card-title">Jeje hola!.</h3>
+                        {!! Form::open(['route'=>['admin.roles.store'], 'method'=>'get']) !!}
+                            @include('admin.roles.partials.form')
+
+                            {!! Form::submit('Crear rol', ['class'=>'btn btn-primary mt-2'])!!}
+                        {!! Form::close() !!}
                     </div>
                 <!-- /.card-header -->
                 <div class="card-body">

@@ -13,6 +13,10 @@ class UserController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
+        $this->middleware('can:admin.user.index')->only('index');
+        $this->middleware('can:admin.user.create')->only('create','store');
+        $this->middleware('can:admin.user.edit')->only('edit', 'update');
+        $this->middleware('can:admin.user.delete')->only('delete');
     }
 
     public function index()
@@ -45,11 +49,11 @@ class UserController extends Controller
 
     public function update(Request $request, $id)
     {
+
         $user = User::findOrFail($id);
-        //$user -> fill($request->name);
-        //$user->name = $request->name;
-        $user->save();
-        return redirect('admin/user');
+        $user->roles()->sync($request->roles);
+
+        return redirect()->route('admin.user.edit', $user)->with('info', 'Se asignan los roles corectamente');
     }
 
     public function delete(Request $request, $id)
